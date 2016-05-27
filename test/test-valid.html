@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimal-ui">
+
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		.component {
+			width: 50%;
+			height: 50px;
+			margin-bottom: 20px;
+			background-color: #eee;
+		}
+	</style>
+
+	<script src="../js/lib/jquery.js"></script>
+	<script src="../js/lib/jquery-ui.min.js"></script>
+	<script src="../js/lib/jquery.fullPage.js"></script>
+
+	<script>
+		$(function(){
+			$('#h5').fullpage({
+				'sectionsColor': ['#254875', '#00ff00', '#254587', '#695684'],
+				onLeave: function(index, nextIndex, direction){
+					$('#h5').find('.page').eq(index).trigger('onLeave')
+				},
+				afterLoad: function(index, nextIndex, direction){
+					$('#h5').find('.page').eq(index).trigger('onLoad')
+				}
+			});
+
+			$('.page').on('onLeave', function(){
+				console.log($(this).attr('id') , '==>>' ,'onLeave');
+			})
+			$('.page').on('afterLoad', function(){
+				console.log($(this).attr('id') , '==>>' ,'onLoad');
+			})
+		});	
+	</script>
+
+</head>
+<body>
+	<!-- 用于验证 fullpage.js 切换页面，以及内容组织结构可用，组件能够进行动画 -->
+
+	<div id="h5">
+		<div class="page section" id="page-1">
+			<div class="component log">logo</div>
+			<div class="component slogan">slogan</div>
+		</div>
+		<div class="page section" id="page-2">
+			<div class="component desc">desc</div>
+		</div>
+		<div class="page section" id="page-3">
+			<div class="component bar">bar</div>
+		</div>
+	</div>
+</body>
+</html>

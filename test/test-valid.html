@@ -16,6 +16,7 @@
 			height: 50px;
 			margin-bottom: 20px;
 			background-color: #eee;
+			display: none;
 		}
 	</style>
 
@@ -28,18 +29,30 @@
 			$('#h5').fullpage({
 				'sectionsColor': ['#254875', '#00ff00', '#254587', '#695684'],
 				onLeave: function(index, nextIndex, direction){
-					$('#h5').find('.page').eq(index).trigger('onLeave')
+					$('#h5').find('.page').eq(index-1).trigger('onLeave');
 				},
-				afterLoad: function(index, nextIndex, direction){
-					$('#h5').find('.page').eq(index).trigger('onLoad')
+				afterLoad: function(anchorLink, index){
+					$('#h5').find('.page').eq(index-1).trigger('onLoad');
 				}
 			});
 
 			$('.page').on('onLeave', function(){
 				console.log($(this).attr('id') , '==>>' ,'onLeave');
+				$(this).find('.component').trigger('onLeave');
+				// $(this).find('.component').triggerHandler('onLeave');
 			})
-			$('.page').on('afterLoad', function(){
+			$('.page').on('onLoad', function(){
 				console.log($(this).attr('id') , '==>>' ,'onLoad');
+				$(this).find('.component').trigger('onLoad');
+				// $(this).find('.component').triggerHandler('onLoad');
+			})
+			$('.component').on('onLoad', function(){
+				$(this).fadeIn();
+				return false;
+			})
+			$('.component').on('onLeave', function(){
+				$(this).fadeOut();
+				return false;
 			})
 		});	
 	</script>

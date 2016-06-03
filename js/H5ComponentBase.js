@@ -12,8 +12,15 @@ var H5ComponentBase = function(name, cfg){
 	cfg.width  && component.width(cfg.width/2);
 	cfg.height && component.height(cfg.height/2);
 
-
+	cfg.css && component.css(cfg.css);
 	cfg.bg && component.css('backgroundImage', 'url('+cfg.bg+')');
+
+	if(cfg.center === true){
+		component.css({
+			marginLeft: (cfg.width/4 * -1)+'px',
+			left:'50%'
+		})
+	}
 
 	return component;
 }

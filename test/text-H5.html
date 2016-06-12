@@ -40,16 +40,23 @@
 							height:100,
 							css:{
 								backgroundColor:'red',
-								top:200
+								top:200,
+								opacity:0
 							},
-							center:true
+							center:true,
+							animateIn:{
+								opacity:1
+							},
+							animateOut:{
+								opacity:0
+							}
 						})
 						.addComponent('slogan', {
 							text: 'slogan',
 							width:400,
 							height:100,
 							css:{
-								backgroundColor:'green',
+								backgroundColor:'red',
 								top:350
 							},
 							center:true
@@ -61,7 +68,7 @@
 							width:400,
 							height:100,
 							css:{
-								backgroundColor:'red',
+								backgroundColor:'green',
 								top:350
 							},
 							center:true

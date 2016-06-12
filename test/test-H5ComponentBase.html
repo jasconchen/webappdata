@@ -35,19 +35,33 @@
 	<script src="../js/H5ComponentBase.js"></script>
 	<script>
 		var cfg = {
-			type: 'base',
-			width: 514,
-			height: 306,
+			type:'base',
+			width:514,
+			height:306,
 
-			bg: './p1_people.png',
-			css : {
-				left: 50,
-				top: 50
+			bg:'./p1_people.png',
+			css:{
+				bottom:0,
+				opacity:0
 			},
-			center: true
+			animateIn:{
+				bottom:50,
+				opacity:1
+			},
+			animateOut:{
+				bottom:0,
+				opacity:0
+			},
+			center:true
 		}
 		var h5 = new H5ComponentBase('myname', cfg);
 		$('.iphone').append(h5);
+
+		var leave = true;
+		$('body').click(function(){
+			leave = !leave;
+			$('.h5_component').trigger(leave?'onLeave':'onLoad');
+		})
 	</script>
 </body>
 </html>

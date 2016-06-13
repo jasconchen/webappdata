@@ -1,5 +1,5 @@
-/* 散点图表组件对象 */
-var H5ComponentPoint = function(name, cfg) {
+/* 柱图组件对象 */
+var H5ComponentBar = function(name, cfg) {
 	var component = new H5ComponentBase(name, cfg);
 
 	var base = cfg.data[0][1]; // 以第一个数据的比例为大小的100%
@@ -11,7 +11,7 @@ var H5ComponentPoint = function(name, cfg) {
 
 		var name = $('<div class="name">'+item[0]+'</div>');
 		var rate = $('<div class="per">'+(item[1]*100)+'%</div>');
-		
+
 		name.append(rate)
 		point.append(name);
 
@@ -25,12 +25,37 @@ var H5ComponentPoint = function(name, cfg) {
 			point.css({
 				left: item[3],
 				top: item[4]
-			})
+			});
+            //  任务一：暂存left、top到元素上
+            point.data('left',item[3]).data('top',item[4])
 		}
-
-
+        //  任务二：设置zIndex、重设位置
+        point.css('zIndex',100-idx);
+        point.css({
+        	left:0,
+        	top:0
+        })
+        point.css('transition', 'all 1s '+idx*.5+'s');
+		    
 		component.append(point);
 	})
-
+	// 任务三：onLoad之后取出暂存的left、top 并且附加到 CSS 中
+	component.on('onLoad', function(){
+		component.find('.point').each(function(idx, item) {
+			$(item).css({
+				left:$(item).data('left'),
+				top:$(item).data('top')
+			})
+		});
+	})
+	// 任务 四：onLeave之后，还原初始的位置
+	component.on('onLeave', function(){
+		component.find('.point').each(function(idx, item) {
+			$(item).css({
+				left:0,
+				top:0
+			})
+		});
+	})
 	return component;
 }

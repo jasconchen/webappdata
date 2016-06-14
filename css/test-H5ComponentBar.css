@@ -24,7 +24,7 @@
 }
 .h5_component_bar .rate .bg {
 	background-color: #99c0ff;
-	width: 100%;
+	width: 0%;
 	height: 100%;
 	position: absolute;
 	left: 0;
@@ -36,18 +36,19 @@
 	color: #99c0ff;
 	margin-left: 5px;
 	float: left;
+	opacity: 0;
 	// position: absolute;
 	// right: -20px;
 }
 .h5_component_bar_load .rate .bg{
-	transition: all 1s;
+	transition: all 1s .5s;
 	width: 100%;
 }
 .h5_component_bar_leave .rate .bg{
 	width: 0;
 }
 .h5_component_bar_load .per {
-	transition: all 1s 1s;
+	transition: all 1s 1.5s;
 	opacity: 1;
 }
 .h5_component_bar_leave .per {

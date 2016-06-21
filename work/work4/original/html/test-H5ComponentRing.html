@@ -30,23 +30,22 @@
 	<!-- 引入饼图资源 -->
 	<script src="../js/H5ComponentPie.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/test-H5ComponentPie.css">
+	<!-- 引入环图资源 -->
+	<script src="../js/H5ComponentRing.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/test-H5ComponentRing.css">
 
 </head>
 <body>
-	<!-- 用于验证 H5ComponentPie 对象（饼图组件） -->
+	<!-- 用于验证 H5ComponentRing 对象（环图组件） -->
 
 	<div class="iphone"></div>
 	<script>
 		var cfg = {
-			type:'pie',
+			type:'ring',
 			width:400,
 			height:400,
 			data:[
-				['Js', .4, '#ff7676'],
-				['CSS3', .2, ],
-				['HTML5', .05, ],
-				['PHP', .2, ],
-				['jQuery', .15, ]
+				['Js', .7, '#ff7676']
 			],
 			css:{
 				top:200,
@@ -62,7 +61,7 @@
 			// },
 			center:true
 		}
-		var h5 = new H5ComponentPie('pie', cfg);
+		var h5 = new H5ComponentRing('pie', cfg);
 		$('.iphone').append(h5);
 
 		var leave = true;

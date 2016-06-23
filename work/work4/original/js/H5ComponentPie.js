@@ -59,6 +59,7 @@ var H5ComponentPie = function(name, cfg) {
 
 		sAngel = eAngel;
 
+		//  加入所有的项目文本以及百分比
 		var text = $('<div class="text"></div>');
 		text.text(cfg.data[i][0]);
 
@@ -68,14 +69,14 @@ var H5ComponentPie = function(name, cfg) {
 		var x = r + Math.sin(.5 * Math.PI - sAngel) * r;
 		var y = r + Math.cos(.5 * Math.PI - sAngel) * r;
 
-		if (x>w/2) {
+		if (x > w / 2) {
 			text.css('left', x / 2);
-		}else {
+		} else {
 			text.css('right', (w - x) / 2);
 		}
-		if (y>h/2) {
+		if (y > h / 2) {
 			text.css('top', y / 2);
-		}else {
+		} else {
 			text.css('bottom', (h - y) / 2);
 		}
 		if (cfg.data[i][2]) {
@@ -93,15 +94,9 @@ var H5ComponentPie = function(name, cfg) {
 	$(cns).css('zIndex', 3);
 	component.append(cns);
 
-
-	var r = w / 2;
-	ctx.beginPath();
 	ctx.fillStyle = '#eee';
 	ctx.strokeStyle = '#eee';
 	ctx.lineWidth = 1;
-	ctx.arc(r, r, r, 0, 2 * Math.PI);
-	ctx.fill();
-	ctx.stroke();
 
 
 	var draw = function(per) {
@@ -118,7 +113,7 @@ var H5ComponentPie = function(name, cfg) {
 		ctx.fill();
 		ctx.stroke();
 
-		if (per >=1) {
+		if (per >= 1) {
 			component.find('.text').css('opacity', 1);
 		}
 	}

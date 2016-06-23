@@ -16,7 +16,7 @@ var H5ComponentPie = function(name, cfg) {
 
 
 	var r = w / 2;
-	// 加入一个地图层
+	// 加入一个底图层
 	ctx.beginPath();
 	ctx.fillStyle = '#eee';
 	ctx.strokeStyle = '#eee';
@@ -56,9 +56,9 @@ var H5ComponentPie = function(name, cfg) {
 		ctx.arc(r, r, r, sAngel, eAngel);
 		ctx.fill();
 		ctx.stroke();
-
 		sAngel = eAngel;
 
+		//  加入所有的项目文本以及百分比
 		var text = $('<div class="text"></div>');
 		text.text(cfg.data[i][0]);
 
@@ -68,14 +68,14 @@ var H5ComponentPie = function(name, cfg) {
 		var x = r + Math.sin(.5 * Math.PI - sAngel) * r;
 		var y = r + Math.cos(.5 * Math.PI - sAngel) * r;
 
-		if (x>w/2) {
+		if (x > w / 2) {
 			text.css('left', x / 2);
-		}else {
+		} else {
 			text.css('right', (w - x) / 2);
 		}
-		if (y>h/2) {
+		if (y > h / 2) {
 			text.css('top', y / 2);
-		}else {
+		} else {
 			text.css('bottom', (h - y) / 2);
 		}
 		if (cfg.data[i][2]) {
@@ -94,14 +94,9 @@ var H5ComponentPie = function(name, cfg) {
 	component.append(cns);
 
 
-	var r = w / 2;
-	ctx.beginPath();
 	ctx.fillStyle = '#eee';
 	ctx.strokeStyle = '#eee';
 	ctx.lineWidth = 1;
-	ctx.arc(r, r, r, 0, 2 * Math.PI);
-	ctx.fill();
-	ctx.stroke();
 
 
 	var draw = function(per) {
@@ -118,8 +113,10 @@ var H5ComponentPie = function(name, cfg) {
 		ctx.fill();
 		ctx.stroke();
 
-		if (per >=1) {
+		if (per >= 1) {
+			H5ComponentPie.reSort(component.find('.text'));
 			component.find('.text').css('opacity', 1);
+			ctx.clearRect(0, 0, w, h);
 		}
 	}
 	draw(0);
@@ -146,4 +143,31 @@ var H5ComponentPie = function(name, cfg) {
 	});
 
 	return component;
+}
+
+// 重排项目文本元素
+H5ComponentPie.reSort = function(list) {
+
+	// 1.检测相交
+	var compare = function(domA, domB) {
+
+		var offsetA = $(domA).offset();
+		var offsetB = $(domB).offset();
+
+		// domA 的投影
+		var shaddowA_x = [offsetA.left, $(domA).width() + offsetA.left];
+		var shaddowA_y = [offsetA.top, $(domA).height() + offsetA.top];
+
+		// domB 的投影
+		var shaddowB_x = [offsetB.left, $(domB).width() + offsetB.left];
+		var shaddowB_y = [offsetB.top, $(domB).height() + offsetB.top];
+
+		// 检测 x
+		var intersect_x = shaddowA_x[0] > shaddowB_x[0] && shaddowA_x[0] > shaddowB_x[0]
+	}
+
+	// 2.错开重排
+	var reset = function(domA, domB) {
+
+	}
 }
